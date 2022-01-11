@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { API_GET_DATA } from "../../global/constants";
 
 import Edit from "./components/Edit";
@@ -23,8 +23,12 @@ async function pushData(Data) {
 
 const Home = () => {
   const [Data, setData] = useState([]);
+  const submitStatus = useRef(false);
 
   useEffect(() => {
+    if(!submitStatus){
+      return
+    }
     pushData(Data);
   }, [Data]);
 
